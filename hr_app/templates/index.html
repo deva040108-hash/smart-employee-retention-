@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Turnover Prediction Dashboard</title>
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Dashboard Header -->
+        <header class="dashboard-header">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="url(#paint0_linear)"/>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="4" y1="4" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#4F46E5"/>
+                            <stop offset="1" stop-color="#7C3AED"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Employee Turnover Predictor</h1>
+            </div>
+            <p class="subtitle">AI-powered analytics and retention insights</p>
+        </header>
+
+        <main class="dashboard-content">
+            <!-- Data Input Form Section -->
+            <section class="card input-section">
+                <h2>Employee Details</h2>
+                <p class="section-desc">Enter the employee's current data to predict their likelihood of leaving.</p>
+                <form id="prediction-form">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="Age" min="18" max="100" required placeholder="e.g. 30">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="salary">Annual Salary ($)</label>
+                            <input type="number" id="salary" name="Salary" min="0" required placeholder="e.g. 75000">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="job-role">Job Role</label>
+                            <select id="job-role" name="JobRole" required>
+                                <option value="" disabled selected>Select Role</option>
+                                <option value="0">Software Developer</option>
+                                <option value="1">Manager</option>
+                                <option value="2">Sales Executive</option>
+                                <option value="3">Human Resources</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="years">Years at Company</label>
+                            <input type="number" id="years" name="YearsAtCompany" min="0" max="50" required placeholder="e.g. 5">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="satisfaction">Job Satisfaction (1-5)</label>
+                            <select id="satisfaction" name="JobSatisfaction" required>
+                                <option value="5">5 - Highly Satisfied</option>
+                                <option value="4">4 - Satisfied</option>
+                                <option value="3">3 - Neutral</option>
+                                <option value="2">2 - Dissatisfied</option>
+                                <option value="1">1 - Highly Dissatisfied</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="wlb">Work-Life Balance (1-5)</label>
+                            <select id="wlb" name="WorkLifeBalance" required>
+                                <option value="5">5 - Excellent</option>
+                                <option value="4">4 - Good</option>
+                                <option value="3">3 - Average</option>
+                                <option value="2">2 - Poor</option>
+                                <option value="1">1 - Terrible</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group full-width">
+                            <label for="performance">Performance Rating (1-5)</label>
+                            <select id="performance" name="PerformanceRating" required>
+                                <option value="5">5 - Outstanding</option>
+                                <option value="4">4 - Exceeds Expectations</option>
+                                <option value="3">3 - Meets Expectations</option>
+                                <option value="2">2 - Needs Improvement</option>
+                                <option value="1">1 - Unacceptable</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="analyze-btn">
+                        <span>Analyze Risk Profile</span>
+                        <div class="spinner hidden" id="loading-spinner"></div>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Results Section (Initially Hidden via CSS) -->
+            <section class="results-container hidden" id="results-section">
+                <!-- Left Column: Prediction Overview -->
+                <div class="card result-card" id="summary-card">
+                    <h2>Prediction Overview</h2>
+                    <div class="prediction-status">
+                        <div class="status-indicator">
+                            <div class="indicator-ring" id="risk-ring"></div>
+                            <span class="prediction-text" id="turnover-prediction">--</span>
+                        </div>
+                        <div class="status-details">
+                            <p class="label">Turnover Risk Level</p>
+                            <h3 id="risk-level" class="risk-badge">--</h3>
+                            <p class="prob-text">Estimated probability of leaving: <span id="probability-score">0%</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Recommended Strategies -->
+                <div class="card strategies-card">
+                    <h2>Recommended Retention Strategies</h2>
+                    <ul class="strategies-list" id="strategies-list">
+                        <!-- Bullet points injected here via JavaScript -->
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Link to external JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

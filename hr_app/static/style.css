@@ -1,0 +1,311 @@
+/* Modern Dashboard Styling with Variables */
+:root {
+    --bg-color: #f3f4f6;
+    --card-bg: #ffffff;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --accent-color: #4f46e5;
+    --accent-hover: #4338ca;
+    --border-color: #e5e7eb;
+    
+    /* Semantic Colors for Risk Levels */
+    --risk-low: #10b981;    /* Emerald Green */
+    --risk-medium: #f59e0b; /* Amber */
+    --risk-high: #ef4444;   /* Red */
+    
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    padding: 2.5rem 1rem;
+}
+
+.dashboard-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Header Styles */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.logo h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.025em;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Base Card Styles */
+.card {
+    background: var(--card-bg);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.card h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.section-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Form Grid System */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Make an input span full width on desktop */
+.input-group.full-width {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+input, select {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    color: var(--text-primary);
+    background-color: #fff;
+    transition: all 0.2s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Submit Button & Animations */
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--accent-color) 0%, #7c3aed 100%);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    transform: translateY(-2px);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Results Layout Grid */
+.results-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Overview takes less space than Strategies */
+    gap: 1.5rem;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    margin-top: 1rem;
+}
+
+/* Utility to hide elements */
+.hidden {
+    display: none !important;
+    opacity: 0;
+}
+
+/* Circular Dashboard Indicator */
+.prediction-status {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.status-indicator {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.indicator-ring {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 50%;
+    border: 8px solid var(--border-color);
+    transition: border-color 0.4s ease;
+}
+
+.prediction-text {
+    font-size: 1.75rem;
+    font-weight: 700;
+    z-index: 1;
+}
+
+.status-details {
+    flex: 1;
+}
+
+.label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+/* Badge for Risk Level */
+.risk-badge {
+    display: inline-block;
+    padding: 0.35rem 1.25rem;
+    border-radius: 9999px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    background: var(--bg-color);
+}
+
+.prob-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Dynamic Classes appended by JavaScript based on Risk Level */
+.risk-low .indicator-ring { border-color: var(--risk-low); }
+.risk-low .prediction-text { color: var(--risk-low); }
+.badge-low { background-color: rgba(16, 185, 129, 0.1); color: var(--risk-low); }
+
+.risk-medium .indicator-ring { border-color: var(--risk-medium); }
+.risk-medium .prediction-text { color: var(--risk-medium); }
+.badge-medium { background-color: rgba(245, 158, 11, 0.1); color: var(--risk-medium); }
+
+.risk-high .indicator-ring { border-color: var(--risk-high); }
+.risk-high .prediction-text { color: var(--risk-high); }
+.badge-high { background-color: rgba(239, 68, 68, 0.1); color: var(--risk-high); }
+
+/* Retention Strategies List */
+.strategies-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.strategies-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+    background-color: var(--bg-color);
+    border-radius: 0.75rem;
+    border-left: 4px solid var(--accent-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.strategies-list li::before {
+    content: "💡"; /* Icon instead of bullet */
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+/* Loading Spinner */
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive Adjustments for Mobile */
+@media (max-width: 768px) {
+    .results-container {
+        grid-template-columns: 1fr;
+    }
+    .prediction-status {
+        flex-direction: column;
+        text-align: center;
+    }
+}
